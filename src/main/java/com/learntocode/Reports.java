@@ -1,9 +1,12 @@
 package com.learntocode;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Reports {
-    public void reportsScreen() {
+    public void reportsScreen(List<Transaction> transactions) {
         try {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Welcome to the Reports Screen where you can filter transactions.");
@@ -15,8 +18,23 @@ public class Reports {
 
             switch (command) {
                 case 1:
+                    LocalDate currentDate = LocalDate.now();
+                    int currentMonth = currentDate.getMonthValue();
 
+                    List<Transaction> monthToDateTransactions = new ArrayList<>();
+                    for (Transaction transaction : transactions) {
+                        LocalDate transactionDate = transaction.getDate();
+                        if (transactionDate == transaction.getDate()) {
+                            monthToDateTransactions.add(transaction);
+                        }
+                    }
+
+                    System.out.println("Month to Date Transactions: ");
+                    for (Transaction transaction : monthToDateTransactions) {
+                        System.out.println(transaction.getType() + " " + transaction.getDate() + " " + transaction.getTime() + " " + transaction.getDescription() + " " + transaction.getVendor() + " $" + transaction.getAmount());
+                    }
                     break;
+
                 case 2:
 
                     break;

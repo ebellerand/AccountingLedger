@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29c027ca-25d5-4a85-8687-c484cba22ec1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/learntocode/Reports.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/learntocode/AccountingLedgerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/learntocode/AccountingLedgerMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/learntocode/Ledger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/learntocode/Ledger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/learntocode/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/learntocode/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learntocode/Reports.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/learntocode/Reports.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

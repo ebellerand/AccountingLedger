@@ -182,13 +182,15 @@ public class Ledger {
         for (Transaction transaction : transactions) {
             if (transaction.getAmount() > 0.0f) {
 
-    transaction.setType("Deposit");
+                transaction.setType("Deposit");
 
             } else {
-    transaction.setType("Payment");
+                transaction.setType("Payment");
             }
         }
     }
+    Reports reports = new Reports();
+
             public void LedgerScreen() {
         try {
             System.out.println("Ledger: ");
@@ -207,7 +209,7 @@ public class Ledger {
                 displayPayments();
 
             } else if (command.equalsIgnoreCase("R")) {
-                reportsScreen();
+                reports.reportsScreen(transactions);
             }
 
         } catch (Exception e) {

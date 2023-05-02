@@ -16,26 +16,58 @@ public class Reports {
             System.out.println("Please enter your selection: ");
             int command = scanner.nextInt();
 
+            LocalDate currentDate = LocalDate.now();
+            int currentMonth = currentDate.getMonthValue();
+            int currentYear = currentDate.getYear();
+
             switch (command) {
+
                 case 1:
-                    LocalDate currentDate = LocalDate.now();
-                    int currentMonth = currentDate.getMonthValue();
 
                     List<Transaction> monthToDateTransactions = new ArrayList<>();
                     for (Transaction transaction : transactions) {
                         LocalDate transactionDate = transaction.getDate();
-                        if (transactionDate == transaction.getDate()) {
+
+                        if (transactionDate.getYear() == currentYear && transactionDate.getMonthValue() == currentMonth) {
                             monthToDateTransactions.add(transaction);
                         }
                     }
+                    if (monthToDateTransactions.isEmpty()) {
+                        System.out.println("No available transactions. ");
+                        System.out.println("--------------------------------");
+                        return;
 
-                    System.out.println("Month to Date Transactions: ");
-                    for (Transaction transaction : monthToDateTransactions) {
-                        System.out.println(transaction.getType() + " " + transaction.getDate() + " " + transaction.getTime() + " " + transaction.getDescription() + " " + transaction.getVendor() + " $" + transaction.getAmount());
+                    } else {
+
+                        System.out.println("Month to Date Transactions: ");
+                        System.out.println("--------------------------------------------");
+                        for (Transaction transaction : monthToDateTransactions) {
+                            System.out.println(transaction.getType() + " " + transaction.getDate() + " " + transaction.getTime() + " " + transaction.getDescription() + " " + transaction.getVendor() + " $" + transaction.getAmount());
+                            break;
+                        }
+
+
                     }
-                    break;
 
-                case 2:
+                    case 2:
+                    LocalDate firstDayOfPrevMonth = LocalDate.of(currentYear, currentMonth - 1, 1);
+                    LocalDate lastDayOfPrevMonth = firstDayOfPrevMonth.withDayOfMonth(firstDayOfPrevMonth.lengthOfMonth());
+                    List<Transaction> prevMonthTransactions = new ArrayList<>();
+                    for (Transaction transaction : transactions) {
+                        LocalDate transactionDate = transaction.getDate();
+                        if (transactionDate.isAfter(firstDayOfPrevMonth.minusDays(1)) && transactionDate.isBefore(lastDayOfPrevMonth.plusDays(1))) {
+                            prevMonthTransactions.add(transaction);
+
+                            System.out.println("Previous month transactions: ");
+                            System.out.println("-----------------------------------");
+                            for (Transaction prevMonthTransaction: prevMonthTransactions) {
+                                System.out.println(prevMonthTransaction.getType() + " " + prevMonthTransaction.getDate() + " " + prevMonthTransaction.getDescription() + " " + prevMonthTransaction.getVendor() + " $" + prevMonthTransaction.getAmount());
+                            }
+
+
+                        }
+                    }
+
 
                     break;
 

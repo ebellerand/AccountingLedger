@@ -22,7 +22,11 @@ public class Transaction { //Define attributes
         this.description = description;
         this.vendor = vendor;
         this.amount = amount;
-        this.type = type;
+        if (amount > 0) {
+            this.type = "Deposit";
+        } else {
+            this.type = "Payment";
+        }
     }
     //Getters and Setters
 
@@ -68,7 +72,7 @@ public class Transaction { //Define attributes
     }
 
     public String getType() {
-        return "Transaction";
+        return type;
     }
 
     public void setType(String type) {

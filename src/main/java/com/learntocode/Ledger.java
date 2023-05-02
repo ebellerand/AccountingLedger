@@ -52,7 +52,7 @@ public class Ledger {
         }
     }
     Scanner scanner = new Scanner(System.in);
-    public void addPayment() throws IOException {
+    public void makePayment() throws IOException {
 
         try {
             System.out.println("Please enter the payment date in yyyy-MM-dd format: ");
@@ -114,7 +114,7 @@ public class Ledger {
             }
         }
 
-        public void makePayment(Scanner scanner) throws IOException {
+       /* public void makePayment(Scanner scanner) throws IOException {
                 try {
                     System.out.println("Please enter the payment date in yyyy-MM-dd format: ");
                     LocalDate date = LocalDate.parse((scanner.nextLine()));
@@ -142,7 +142,79 @@ public class Ledger {
                     System.out.println("Invalid input for amount. ");
                     scanner.nextLine();
                 }
+                 } */
+
+    public void displayAllTransactions() {
+        System.out.println("Here are all your transactions: ");
+        System.out.println("--------------------------------");
+        if (transactions.size() <= 0) {
+            System.out.println("You have no transactions. ");
+        } else {
+            for (Transaction transaction : transactions) {
+                System.out.println("Type: " + transaction.getType());
+                System.out.println("Date: " + transaction.getDate());
+                System.out.println("Time: " + transaction.getTime());
+                System.out.println("Description: " + transaction.getDescription());
+                System.out.println("Vendor: " + transaction.getVendor());
+                System.out.println("Amount " + transaction.getAmount());
+                System.out.println("-----------------------------------------------");
             }
         }
+    }  public void displayDeposits() {
+        System.out.println("Here are your deposits: ");
+        System.out.println("----------------------------------------------------------");
+        for (Transaction transaction : transactions) {
+            if (transaction.getAmount() > 0) {
+                System.out.println(transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getTime() + " " + transaction.getVendor() + " $" + transaction.getAmount());
+            }
+        }
+
+    } public void displayPayments() {
+        System.out.println("Here are your payments: ");
+        System.out.println("-------------------------------------------------------------");
+        for (Transaction transaction : transactions) {
+            if (transaction.getAmount() < 0) {
+                System.out.println(transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getTime() + " " + transaction.getVendor() + " $" + transaction.getAmount());
+            }
+        }
+    }
+    public void determineType() {
+        for (Transaction transaction : transactions) {
+            if (transaction.getAmount() > 0.0f) {
+
+    transaction.setType("Deposit");
+
+            } else {
+    transaction.setType("Payment");
+            }
+        }
+    }
+            public void LedgerScreen() {
+        try {
+            System.out.println("Ledger: ");
+            System.out.println("---------------------------------------------------------");
+            System.out.println("What would you like to do? 'A' to display all entries, 'D' to display all deposits, 'P' to display all payments, 'R' for reports.");
+            System.out.println("---------------------------");
+            System.out.println("Please enter your selection: ");
+
+            String command = scanner.nextLine();
+
+            if (command.equalsIgnoreCase("A")) {
+                displayAllTransactions();
+            } else if (command.equalsIgnoreCase("D")) {
+                displayDeposits();
+            } else if (command.equalsIgnoreCase("P")) {
+                displayPayments();
+
+            } else if (command.equalsIgnoreCase("R")) {
+                reportsScreen();
+            }
+
+        } catch (Exception e) {
+            System.out.println("There was an error.");
+            System.out.println("----------------------");
+        }
+    }
+}
 
 

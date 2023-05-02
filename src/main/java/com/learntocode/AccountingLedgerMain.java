@@ -21,10 +21,10 @@ public class AccountingLedgerMain {
                 if (command.equalsIgnoreCase("d")) {
                     ledger.addDeposit();
                 } else if (command.equalsIgnoreCase("P")) {
-                    ledger.addPayment();
+                    ledger.makePayment();
 
                 } else if (command.equalsIgnoreCase("L")) {
-                    //displayLedger();
+                    ledger.LedgerScreen();
 
                 } else if (command.equalsIgnoreCase("X")) {
                     System.out.println("Goodbye! ");

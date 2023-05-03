@@ -43,11 +43,10 @@ public class Reports {
                         System.out.println("--------------------------------------------");
                         for (Transaction transaction : monthToDateTransactions) {
                             System.out.println(transaction.getType() + " " + transaction.getDate() + " " + transaction.getTime() + " " + transaction.getDescription() + " " + transaction.getVendor() + " $" + transaction.getAmount());
-                            break;
                         }
-
-
                     }
+
+                    break;
 
                 case 2:
                     LocalDate firstDayOfPrevMonth = LocalDate.of(currentYear, currentMonth - 1, 1);
@@ -58,27 +57,30 @@ public class Reports {
                         if (transactionDate.isAfter(firstDayOfPrevMonth.minusDays(1)) && transactionDate.isBefore(lastDayOfPrevMonth.plusDays(1))) {
                             prevMonthTransactions.add(transaction);
 
-                            System.out.println("Previous month transactions: ");
-                            System.out.println("-----------------------------------");
-                            for (Transaction prevMonthTransaction : prevMonthTransactions) {
-                                System.out.println(prevMonthTransaction.getType() + " " + prevMonthTransaction.getDate() + " " + prevMonthTransaction.getDescription() + " " + prevMonthTransaction.getVendor() + " $" + prevMonthTransaction.getAmount());
-                            }
-
-
                         }
                     }
-
-
+                    System.out.println("Previous month transactions: ");
+                    System.out.println("-----------------------------------");
+                    for (Transaction prevMonthTransaction : prevMonthTransactions) {
+                        System.out.println(prevMonthTransaction.getType() + " " + prevMonthTransaction.getDate() + " " + prevMonthTransaction.getDescription() + " " + prevMonthTransaction.getVendor() + " $" + prevMonthTransaction.getAmount());
+                    }
                     break;
 
                 case 3:
                     LocalDate today = LocalDate.now();
-                    LocalDate firstDayOfTheYear = currentDate.withDayOfYear(1);
-                    List<Transaction> YearToDateTransactions = new ArrayList<>();
+                    LocalDate firstDayOfTheYear = LocalDate.of(currentYear, 1, 1);
+                    List<Transaction> yearToDateTransactions = new ArrayList<>();
                     for (Transaction transaction : transactions) {
                         LocalDate transactionDate = transaction.getDate();
+                        if ((transactionDate.getYear() == currentYear) && transactionDate.isEqual(firstDayOfTheYear) || transactionDate.isAfter(firstDayOfTheYear)) {
+                            yearToDateTransactions.add(transaction);
 
-
+                        }
+                        System.out.println("Year-to-Date transactions: ");
+                        System.out.println("---------------------------------------------------");
+                        for (Transaction yearToDateTransaction: yearToDateTransactions) {
+                            System.out.println(yearToDateTransaction.getType() + " " + yearToDateTransaction.getDate() + " " + yearToDateTransaction.getTime() + " " + yearToDateTransaction.getVendor() + " " + yearToDateTransaction.getDescription() + " " + yearToDateTransaction.getAmount());
+                        }
                         break;
                     }
                         case 4:

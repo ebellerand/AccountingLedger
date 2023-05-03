@@ -49,7 +49,7 @@ public class Reports {
 
                     }
 
-                    case 2:
+                case 2:
                     LocalDate firstDayOfPrevMonth = LocalDate.of(currentYear, currentMonth - 1, 1);
                     LocalDate lastDayOfPrevMonth = firstDayOfPrevMonth.withDayOfMonth(firstDayOfPrevMonth.lengthOfMonth());
                     List<Transaction> prevMonthTransactions = new ArrayList<>();
@@ -60,7 +60,7 @@ public class Reports {
 
                             System.out.println("Previous month transactions: ");
                             System.out.println("-----------------------------------");
-                            for (Transaction prevMonthTransaction: prevMonthTransactions) {
+                            for (Transaction prevMonthTransaction : prevMonthTransactions) {
                                 System.out.println(prevMonthTransaction.getType() + " " + prevMonthTransaction.getDate() + " " + prevMonthTransaction.getDescription() + " " + prevMonthTransaction.getVendor() + " $" + prevMonthTransaction.getAmount());
                             }
 
@@ -72,28 +72,35 @@ public class Reports {
                     break;
 
                 case 3:
+                    LocalDate today = LocalDate.now();
+                    LocalDate firstDayOfTheYear = currentDate.withDayOfYear(1);
+                    List<Transaction> YearToDateTransactions = new ArrayList<>();
+                    for (Transaction transaction : transactions) {
+                        LocalDate transactionDate = transaction.getDate();
 
-                    break;
 
-                case 4:
+                        break;
+                    }
+                        case 4:
 
-                    break;
+                            break;
 
-                case 5:
+                        case 5:
 
-                    break;
+                            break;
 
-                case 6:
+                        case 6:
 
-                    break;
+                            break;
 
-                default:
-                    System.out.println("Invalid selection ");
+                        default:
+                            System.out.println("Invalid selection ");
+                    }
+
+            } catch(Exception e){
+                System.out.println("There was an error. ");
+                System.out.println("-----------------------------------");
             }
-
-        } catch (Exception e) {
-            System.out.println("There was an error. ");
-            System.out.println("-----------------------------------");
         }
     }
-}
+

@@ -163,9 +163,9 @@ public class Reports {
                     for (Transaction transaction : transactions) {
                         if ((transaction.getDate().isAfter(searchStartDate) ||
                                 transaction.getDate().isEqual(searchStartDate) && transaction.getDate().isBefore(searchEndDate) ||
-                                transaction.getDate().isEqual(searchEndDate)) ||
-                                transaction.getVendor().equalsIgnoreCase(customSearchVendor) ||
-                                transaction.getDescription().equalsIgnoreCase(searchDescription) || transaction.getAmount() == searchAmount) {
+                                transaction.getDate().isEqual(searchEndDate)) &&
+                                transaction.getVendor().equalsIgnoreCase(customSearchVendor) &&
+                                transaction.getDescription().equalsIgnoreCase(searchDescription) && transaction.getAmount() == searchAmount) {
                             customSearchTransactions.add(transaction);
 
                         }

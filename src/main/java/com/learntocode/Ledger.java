@@ -229,12 +229,13 @@ public class Ledger {
 
             } else if (command.equalsIgnoreCase("R")) {
                 reports.reportsScreen(transactions);
+
             } else if (command.equalsIgnoreCase("H")) {
                 return;
             }
 
         } catch (Exception e) {
-            System.out.println("There was a certain error.");
+            System.out.println("There was an error.");
             System.out.println("----------------------");
         }
     }

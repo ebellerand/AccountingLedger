@@ -74,22 +74,22 @@ public class Reports {
                     List<Transaction> yearToDateTransactions = new ArrayList<>();
                     for (Transaction transaction : transactions) {
                         LocalDate transactionDate = transaction.getDate();
-                        if ((transactionDate.getYear() == currentYear) && transactionDate.isEqual(firstDayOfTheYear) || transactionDate.isAfter(firstDayOfTheYear) && transactionDate.isBefore(today) && transactionDate.isEqual(today)) {
+                        if ((transactionDate.getYear() == currentYear) && transactionDate.isEqual(firstDayOfTheYear) || transactionDate.isAfter(firstDayOfTheYear) && transactionDate.isBefore(today) || transactionDate.isEqual(today)) {
                             yearToDateTransactions.add(transaction);
 
                         }
+                    }
 
                         System.out.println("Year-to-Date transactions: ");
                         System.out.println("---------------------------------------------------");
                         for (Transaction yearToDateTransaction : yearToDateTransactions) {
                             System.out.println(yearToDateTransaction.getType() + " " + yearToDateTransaction.getDate() + " " + yearToDateTransaction.getTime() + " " + yearToDateTransaction.getVendor() + " " + yearToDateTransaction.getDescription() + " " + yearToDateTransaction.getAmount());
                         }
-
                         if (yearToDateTransactions.isEmpty()) {
-                            System.out.println("No transactions found. ");
-                        }
+                    System.out.println("No transactions found. ");
                     }
                     break;
+
                 case 4:
                     // LocalDate firstDayOfLastYear = currentDate.withDayOfYear(1).minusYears(1);
                     LocalDate lastYear = currentDate.withYear(currentYear - 1);
@@ -105,9 +105,9 @@ public class Reports {
                                 System.out.println(lastYearTransaction.getType() + " " + lastYearTransaction.getDate() + " " + lastYearTransaction.getDescription() + " " + lastYearTransaction.getVendor() + " $" + lastYearTransaction.getAmount());
                             }
 
-                        } else if (lastYearTransactions.isEmpty()) {
-                            System.out.println("No transactions found. ");
                         }
+                        } if (lastYearTransactions.isEmpty()) {
+                    System.out.println("No transactions found. ");
                     }
 
                     break;

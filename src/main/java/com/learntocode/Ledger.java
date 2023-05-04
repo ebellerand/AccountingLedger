@@ -214,7 +214,7 @@ public class Ledger {
         try {
             System.out.println("Ledger: ");
             System.out.println("---------------------------------------------------------");
-            System.out.println("What would you like to do? 'A' to display all entries, 'D' to display all deposits, 'P' to display all payments, 'R' for reports.");
+            System.out.println("What would you like to do? 'A' to display all entries, 'D' to display all deposits, 'P' to display all payments, 'R' for reports or 'H' to return to the Home screen: ");
             System.out.println("---------------------------");
             System.out.println("Please enter your selection: ");
 
@@ -229,6 +229,8 @@ public class Ledger {
 
             } else if (command.equalsIgnoreCase("R")) {
                 reports.reportsScreen(transactions);
+            } else if (command.equalsIgnoreCase("H")) {
+                return;
             }
 
         } catch (Exception e) {

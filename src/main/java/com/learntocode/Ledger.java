@@ -232,7 +232,7 @@ public class Ledger {
             }
 
         } catch (Exception e) {
-            System.out.println("There was an error.");
+            System.out.println("There was a certain error.");
             System.out.println("----------------------");
         }
     }

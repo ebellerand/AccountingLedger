@@ -1,7 +1,9 @@
 package com.learntocode;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -34,12 +36,13 @@ public class Reports {
                     }
 
                     System.out.println("Month to Date Transactions: ");
-                        System.out.println("--------------------------------------------");
-                        for (Transaction transaction : monthToDateTransactions) {
-                            System.out.println(transaction.getType() + " " + transaction.getDate() + " " + transaction.getTime() + " " + transaction.getDescription() + " " + transaction.getVendor() + " $" + transaction.getAmount());
+                    System.out.println("--------------------------------------------");
+                    for (Transaction transaction : monthToDateTransactions) {
+                        System.out.println(transaction.getType() + " " + transaction.getDate() + " " + transaction.getTime() + " " + transaction.getDescription() + " " + transaction.getVendor() + " $" + transaction.getAmount());
 
-                        } if (monthToDateTransactions.isEmpty()) {
-                    System.out.println("No transactions found. ");
+                    }
+                    if (monthToDateTransactions.isEmpty()) {
+                        System.out.println("No transactions found. ");
                     }
 
                     break;
@@ -82,66 +85,117 @@ public class Reports {
                             System.out.println(yearToDateTransaction.getType() + " " + yearToDateTransaction.getDate() + " " + yearToDateTransaction.getTime() + " " + yearToDateTransaction.getVendor() + " " + yearToDateTransaction.getDescription() + " " + yearToDateTransaction.getAmount());
                         }
 
-                    if (yearToDateTransactions.isEmpty()) {
+                        if (yearToDateTransactions.isEmpty()) {
                             System.out.println("No transactions found. ");
                         }
-                    } break;
-                        case 4:
-                           // LocalDate firstDayOfLastYear = currentDate.withDayOfYear(1).minusYears(1);
-                            LocalDate lastYear = currentDate.withYear(currentYear - 1);
-                            List<Transaction> lastYearTransactions = new ArrayList<>();
-                            for (Transaction transaction : transactions) {
-                                LocalDate transactionDate = transaction.getDate();
-                               if (transactionDate.isEqual(lastYear)) {
-                                    lastYearTransactions.add(transaction);
-                                } else if (lastYearTransactions.isEmpty()) {
-                                    System.out.println( "No transactions found. ");
-                                }
+                    }
+                    break;
+                case 4:
+                    // LocalDate firstDayOfLastYear = currentDate.withDayOfYear(1).minusYears(1);
+                    LocalDate lastYear = currentDate.withYear(currentYear - 1);
+                    List<Transaction> lastYearTransactions = new ArrayList<>();
+                    for (Transaction transaction : transactions) {
+                        LocalDate transactionDate = transaction.getDate();
+                        if (transactionDate.isEqual(lastYear)) {
+                            lastYearTransactions.add(transaction);
 
-                                System.out.println("Last Year's transactions: ");
-                                System.out.println("-----------------------------------------------");
-                            }
-                                for (Transaction lastYearTransaction : lastYearTransactions){
-                                    System.out.println(lastYearTransaction.getType() + " " + lastYearTransaction.getDate() + " " + lastYearTransaction.getDescription() + " " + lastYearTransaction.getVendor() + " $" + lastYearTransaction.getAmount());
-
-                                }
-
-                            break;
-
-                        case 5:
-                            System.out.println("Please enter the vendor: ");
-                            scanner.nextLine();
-                            String searchVendor = scanner.nextLine();
-                            List<Transaction> vendorTransactions = new ArrayList<>();
-                            for (Transaction transaction : transactions) {
-                            if (searchVendor.equalsIgnoreCase(transaction.getVendor())) {
-                                vendorTransactions.add(transaction);
-
-                                }
-                            }
-                            if (vendorTransactions.isEmpty()) {
-                                System.out.println("No transactions found. ");
-                            } else {
-                                System.out.println("Transactions for vendor: " + searchVendor);
-                                System.out.println("------------------------------------------");
-                                for (Transaction transaction : vendorTransactions) {
-                                    System.out.println(transaction.getType() + " " + transaction.getDate() + " " + transaction.getTime() + " " + transaction.getDescription() + " " + transaction.getVendor() + " $" + transaction.getAmount());
-                                }
+                            System.out.println("Last Year's transactions: ");
+                            System.out.println("-----------------------------------------------");
+                            for (Transaction lastYearTransaction : lastYearTransactions) {
+                                System.out.println(lastYearTransaction.getType() + " " + lastYearTransaction.getDate() + " " + lastYearTransaction.getDescription() + " " + lastYearTransaction.getVendor() + " $" + lastYearTransaction.getAmount());
                             }
 
-                            break;
-
-                        case 6:
-
-                            break;
-
-                        default:
-                            System.out.println("Invalid selection ");
+                        } else if (lastYearTransactions.isEmpty()) {
+                            System.out.println("No transactions found. ");
+                        }
                     }
 
-            } catch(Exception e){
+                    break;
+
+                case 5:
+                    System.out.println("Please enter the vendor: ");
+                    scanner.nextLine();
+                    String searchVendor = scanner.nextLine();
+                    List<Transaction> vendorTransactions = new ArrayList<>();
+                    for (Transaction transaction : transactions) {
+                        if (searchVendor.equalsIgnoreCase(transaction.getVendor())) {
+                            vendorTransactions.add(transaction);
+                        }
+                    }
+
+                    System.out.println("Transactions for vendor: " + searchVendor);
+                    System.out.println("------------------------------------------");
+                    for (Transaction transaction : vendorTransactions) {
+                        System.out.println(transaction.getType() + " " + transaction.getDate() + " " + transaction.getTime() + " " + transaction.getDescription() + " " + transaction.getVendor() + " $" + transaction.getAmount());
+                    }
+
+                    if (vendorTransactions.isEmpty()) {
+                        System.out.println("No transactions found. ");
+                    }
+
+                    break;
+
+                case 6:
+                    //try {
+                    System.out.println("Custom Search:");
+                    System.out.println("---------------------------------------------");
+                    System.out.println("Please enter the following search fields: ");
+                    System.out.println("Start Date (yyyy-MM-dd)");
+                    scanner.nextLine();
+                    String searchStartDateStr = scanner.nextLine();
+                    LocalDate searchStartDate = LocalDate.parse(searchStartDateStr, DateTimeFormatter.ISO_LOCAL_DATE);
+
+                    System.out.println("End Date (yyyy-MM-dd)");
+                    String searchEndDateStr = scanner.nextLine();
+                    LocalDate searchEndDate = LocalDate.parse(searchEndDateStr, DateTimeFormatter.ISO_LOCAL_DATE);
+
+                    System.out.println("Description: ");
+                    String searchDescription = scanner.nextLine();
+
+                    System.out.println("Vendor: ");
+                    String customSearchVendor = scanner.nextLine();
+
+                    System.out.println("Amount: ");
+                    float searchAmount = scanner.nextFloat();
+                    scanner.nextLine();
+
+                    List<Transaction> customSearchTransactions = new ArrayList<>();
+                    for (Transaction transaction : transactions) {
+                        if ((transaction.getDate().isAfter(searchStartDate) ||
+                                transaction.getDate().isEqual(searchStartDate) && transaction.getDate().isBefore(searchEndDate) ||
+                                transaction.getDate().isEqual(searchEndDate)) ||
+                                transaction.getVendor().equalsIgnoreCase(customSearchVendor) ||
+                                transaction.getDescription().equalsIgnoreCase(searchDescription) || transaction.getAmount() == searchAmount) {
+                            customSearchTransactions.add(transaction);
+
+                        }
+                    }
+                    if (!customSearchTransactions.isEmpty()) {
+                        System.out.println("Custom Search Results: ");
+                        System.out.println("-----------------------------------");
+                        for (Transaction customTransaction : customSearchTransactions) {
+                            System.out.println(customTransaction.getType() + " " + customTransaction.getDate() + " " + customTransaction.getTime() + " " + customTransaction.getDescription() + " " + customTransaction.getVendor() + " $" + customTransaction.getAmount());
+                        }
+                    } else {
+                        System.out.println("No transactions found. ");
+                    }
+                    /*} catch (Exception e) {
+                        System.out.println("There was an error. "); */
+            //}
+
+                    break;
+                case 0:
+                    return;
+
+                default:
+                    System.out.println("Invalid selection ");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. ");
+
+       /* } catch(Exception e){
                 System.out.println("There was an error. ");
-                System.out.println("-----------------------------------");
+                System.out.println("-----------------------------------"); */
             }
         }
     }

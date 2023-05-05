@@ -56,80 +56,88 @@ public class Ledger {
     Scanner scanner = new Scanner(System.in);
 
     public void makePayment() throws IOException {
-
-        try {
-            System.out.println("Please enter the payment date in yyyy-MM-dd format: ");
-            LocalDate date = LocalDate.parse(scanner.nextLine());
-
-            System.out.println("Enter time in HH:mm:ss format: ");
-            LocalTime time = LocalTime.parse(scanner.nextLine());
-
-            System.out.println("Enter description: ");
-            String description = scanner.nextLine();
-
-            System.out.println("Enter vendor: ");
-            String vendor = scanner.nextLine();
-
-            System.out.println("Enter amount: ");
-            float amount = scanner.nextFloat();
-            scanner.nextLine();
-
-            Transaction payment = new Transaction(date, time, description, vendor, amount);
-            addTransaction(payment);
-
-            System.out.println("Transaction added to ledger. ");
+        while (true) {
 
             try {
-                FileWriter fileWrite = new FileWriter("transactions.csv", true);
-                fileWrite.write(date + "|" + time + "|" + description + "|" + vendor + "|" + amount + "\n");
-                fileWrite.flush();
-                fileWrite.close();
-            } catch (IOException e) {
-                System.out.println("Failed to write to file. ");
-            }
+                System.out.println("Please enter the payment date in yyyy-MM-dd format: ");
+                LocalDate date = LocalDate.parse(scanner.nextLine());
 
-        } catch (DateTimeParseException e) {
-            System.out.println("Error parsing date/time format. ");
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid input for amount. ");
+                System.out.println("Enter time in HH:mm:ss format: ");
+                LocalTime time = LocalTime.parse(scanner.nextLine());
+
+                System.out.println("Enter description: ");
+                String description = scanner.nextLine();
+
+                System.out.println("Enter vendor: ");
+                String vendor = scanner.nextLine();
+
+                System.out.println("Enter amount: ");
+                float amount = scanner.nextFloat();
+                scanner.nextLine();
+
+                Transaction payment = new Transaction(date, time, description, vendor, amount);
+                addTransaction(payment);
+
+                System.out.println("Transaction added to ledger. ");
+
+                try {
+                    FileWriter fileWrite = new FileWriter("transactions.csv", true);
+                    fileWrite.write(date + "|" + time + "|" + description + "|" + vendor + "|" + amount + "\n");
+                    fileWrite.flush();
+                    fileWrite.close();
+                } catch (IOException e) {
+                    System.out.println("Failed to write to file. ");
+                }
+                break;
+
+
+            } catch (DateTimeParseException e) {
+                System.out.println("Error parsing date/time format. ");
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input for amount. ");
+            }
         }
     }
 
     public void addDeposit() throws IOException {
-        try {
-            System.out.println("Please enter the deposit date in yyyy-MM-dd format: ");
-            LocalDate date = LocalDate.parse((scanner.nextLine()));
-
-            System.out.println("Enter time in HH:mm:ss format: ");
-            LocalTime time = LocalTime.parse(scanner.nextLine());
-
-            System.out.println("Enter description: ");
-            String description = scanner.nextLine();
-
-            System.out.println("Enter vendor: ");
-            String vendor = scanner.nextLine();
-
-            System.out.println("Enter amount: ");
-            float amount = scanner.nextFloat();
-            scanner.nextLine();
-
-            Transaction deposit = new Transaction(date, time, description, vendor, amount);
-            addTransaction(deposit);
-
-
-            System.out.println("Deposit added to ledger. ");
+        while (true) {
             try {
-                FileWriter fileWrite = new FileWriter("transactions.csv", true);
-                fileWrite.write(date + "|" + time + "|" + description + "|" + vendor + "|" + amount + "\n");
-                fileWrite.flush();
-                fileWrite.close();
-            } catch (IOException e) {
-                System.out.println("Failed to write to file. ");
+                System.out.println("Please enter the deposit date in yyyy-MM-dd format: ");
+                LocalDate date = LocalDate.parse((scanner.nextLine()));
+
+                System.out.println("Enter time in HH:mm:ss format: ");
+                LocalTime time = LocalTime.parse(scanner.nextLine());
+
+                System.out.println("Enter description: ");
+                String description = scanner.nextLine();
+
+                System.out.println("Enter vendor: ");
+                String vendor = scanner.nextLine();
+
+                System.out.println("Enter amount: ");
+                float amount = scanner.nextFloat();
+                scanner.nextLine();
+
+                Transaction deposit = new Transaction(date, time, description, vendor, amount);
+                addTransaction(deposit);
+
+
+                System.out.println("Deposit added to ledger. ");
+                try {
+                    FileWriter fileWrite = new FileWriter("transactions.csv", true);
+                    fileWrite.write(date + "|" + time + "|" + description + "|" + vendor + "|" + amount + "\n");
+                    fileWrite.flush();
+                    fileWrite.close();
+                } catch (IOException e) {
+                    System.out.println("Failed to write to file. ");
+                }
+                break;
+
+            } catch (DateTimeParseException e) {
+                System.out.println("Error parsing date/time format. ");
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input for amount. ");
             }
-        } catch (DateTimeParseException e) {
-            System.out.println("Error parsing date/time format. ");
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid input for amount. ");
         }
     }
     public void displayAllTransactions() {

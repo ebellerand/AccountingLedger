@@ -36,8 +36,10 @@ public class AccountingLedgerMain {
                 }
 
             } catch (Exception e) {
-                System.out.println("There was an error.");
+                System.out.println("An exception occured.");
                 System.out.println("----------------------");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
             }
 
         }
